@@ -4,12 +4,19 @@ export function parseEnv(env: Record<string, any>): ViteEnv {
 	const envs: any = _.cloneDeep(env)
 
 	Object.entries(env).forEach(([key, value]) => {
-		if (['true', 'false'].includes(value)) {
-			envs[key] = value == 'true' ? true : false
-		}
-
-		if (/^\d+$/.test(value)) {
-			envs[key] = parseInt(value)
+		switch (value) {
+			case 'true':
+			case 'false':
+				envs[key] = value == 'true' ? true : false
+				break
+			case 'null':
+				envs[key] = null
+				break
+			case 'undefined':
+				envs[key] = undefined
+				break
+			default:
+				if (/^\d+$/.test(value)) envs[key] = Number(value)
 		}
 	})
 

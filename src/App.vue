@@ -1,5 +1,8 @@
 <script setup lang="ts">
-console.log(import.meta.env.VITE_SOME_KEY)
+import helper, { env } from './types/helper'
+console.log(env);
+console.log(helper.env)
+console.log(import.meta.env)
 </script>
 
 <template>
