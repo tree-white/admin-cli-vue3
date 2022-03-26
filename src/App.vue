@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import helper, { env } from './types/helper'
-console.log(env);
-console.log(helper.env)
-console.log(import.meta.env)
+// const res = await fetch('http://localhost:4000/api/info').then((r) => r.json())
+// import userApi from '@/api/userApi'
+// const res = await userApi.info()
+// const token = await userApi.login()
+// console.log(token.result.token)
 </script>
 
 <template>
