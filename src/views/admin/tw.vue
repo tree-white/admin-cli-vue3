@@ -1,4 +1,9 @@
 <script setup lang="ts">
+/**
+ * 使用组件实现表单验证
+ * 组件：vee-validate
+ */
+
 import { Form, Field, ErrorMessage, defineRule, configure } from 'vee-validate'
 import { ref } from 'vue'
 import TwButton from '@/components/form/tw-button.vue'
