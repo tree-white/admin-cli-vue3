@@ -1,38 +1,35 @@
 <script setup lang="ts">
 /**
- * 使用API的形式校验
+ * 使用封装好的验证插件
  */
-import { defineRule, configure, useField } from 'vee-validate'
-import { required, min, max, confirmed, email } from '@vee-validate/rules'
-import { localize } from '@vee-validate/i18n'
-import zh_CN from '@vee-validate/i18n/dist/locale/zh_CN.json'
+import valid from '@/plugins/validate'
+const { Form } = valid
 
-defineRule('email', email)
-defineRule('required', required)
-
-configure({
-	generateMessage: localize('zh_CN', zh_CN),
+const { handleSubmit, errors } = valid.useForm({
+	initialValues: { username: 'Trwite' },
+	validationSchema: { username: valid.yup.string().required().email().label('账号') },
 })
 
-const { errorMessage: usernameError, value: usernameValue } = useField(
-	'username',
-	{ required: true, email: true },
-	{
-		label: '用户名',
-	}
-)
+const { errorMessage: usernameError, value: usernameValue } = valid.useField('username', {}, { label: '用户名' })
+
+const onSubmit = handleSubmit((values) => {
+	console.log(values)
+	alert('验证通过')
+})
 </script>
 
 <template>
-	<div>
+	<Form @submit="onSubmit">
 		<input type="text" v-model="usernameValue" class="!w-1/2 h-14" />
 		<p>{{ usernameError }}</p>
-		<!-- <button>提交表单</button> -->
-	</div>
+		<p>{{ errors.username }}</p>
+		<button>提交表单</button>
+	</Form>
 </template>
 
 <style lang="scss">
-div {
+div,
+form {
 	@apply flex w-screen h-screen justify-center items-center bg-gray-200 flex-col;
 	input {
 		@apply border-4 p-2 rounded-md border-violet-500 outline-none;
