@@ -2,7 +2,9 @@
 import userApi from '@/api/userApi'
 import validate from '@/plugins/validate'
 import { store } from '@/utils'
+import { useRouter } from 'vue-router'
 const { Form, Field, ErrorMessage } = validate
+const router = useRouter()
 
 // 使用yup
 // const schema = validate.yup.object().shape({
@@ -22,7 +24,15 @@ const onSubmit = async (values: any) => {
 	} = await userApi.login(values)
 	console.log('token=>', token)
 	// 存储token
-	store.set('token', { token, expire: 10 })
+	store.set('token', { token })
+	// 跳转到首页
+	router.push({ name: 'home' })
+}
+</script>
+
+<script lang="ts">
+export default {
+	route: { name: 'login', meta: { guest: true } },
 }
 </script>
 

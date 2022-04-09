@@ -4,8 +4,9 @@ const { name: projectName } = config
 
 const getProKey = (name: string): string => `${projectName}-${name}`
 
-interface IData {
+export interface IData {
 	expire?: number
+	token?: string
 	[key: string]: any
 }
 export default {
@@ -22,7 +23,7 @@ export default {
 		if (!data) {
 			return null
 		}
-		const dataObj = JSON.parse(data)
+		const dataObj = JSON.parse(data) as IData
 		if (dataObj.expire && +new Date() > dataObj.expire) {
 			this.remove(key)
 			return null

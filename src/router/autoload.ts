@@ -1,3 +1,7 @@
+/**
+ * 路由Api自动加载
+ */
+
 import { env } from '@/utils'
 import { RouteRecordRaw } from 'vue-router'
 

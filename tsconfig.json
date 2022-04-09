@@ -29,5 +29,6 @@
     "vite/**/*.ts",
     "mock/**/*.ts",
     "types/**/*.d.ts",
+    "types/**/*.ts",
   ]
 }
