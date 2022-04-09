@@ -27,7 +27,7 @@ const onSubmit = handleSubmit((values) => {
 	</Form>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 div,
 form {
 	@apply flex w-screen h-screen justify-center items-center bg-gray-200 flex-col;

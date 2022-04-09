@@ -23,7 +23,7 @@ configure({
 	generateMessage: localize('zh_CN', zh_CN),
 })
 
-const onSubmit = (values) => {
+const onSubmit = (values: any) => {
 	console.log(values)
 	alert('验证通过')
 }
