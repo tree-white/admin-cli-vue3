@@ -9,7 +9,7 @@ const props = defineProps({
 		type="text"
 		class="tw-input"
 		:value="props.modelValue"
-		@input="$emit('update:modelValue', $event.target.value)"
+		@input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
 	/>
 </template>
 

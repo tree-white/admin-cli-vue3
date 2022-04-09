@@ -14,10 +14,11 @@ function info() {
 interface Login {
 	token: string
 }
-function login() {
+function login(data: any) {
 	return http.request<Login>({
 		url: `login`,
 		method: 'POST',
+		data,
 	})
 }
 

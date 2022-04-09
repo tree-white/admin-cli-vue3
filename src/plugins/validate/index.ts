@@ -6,6 +6,7 @@ import yup from './yup'
 
 /** 定义语言 */
 veeValidate.configure({
+	// validateOnInput: true, // 全局开启输入验证
 	generateMessage: localize('zh_CN', zh_CN),
 })
 // 使用cdn中文包
