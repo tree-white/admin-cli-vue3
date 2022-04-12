@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Menu from './admin/menu.vue'
 import Navbar from './admin/navbar.vue'
+import HistoryLink from './admin/historyLink.vue'
 </script>
 
 <template>
@@ -19,6 +20,7 @@ import Navbar from './admin/navbar.vue'
 		<!-- 右侧内容 -->
 		<div class="content flex-1 bg-gray-200">
 			<Navbar />
+			<HistoryLink />
 			<router-view />
 		</div>
 	</div>
