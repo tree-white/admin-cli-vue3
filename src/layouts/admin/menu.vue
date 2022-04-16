@@ -1,36 +1,33 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { router } from '@/store/router'
+import { RouteRecordNormalized, RouteRecordRaw, useRouter } from 'vue-router'
+const routeService = useRouter()
+const routerStore = router()
 
-interface IMenuItem {
-  title: string
-  icon?: string
-  active?: boolean
-}
-interface IMenu extends IMenuItem {
-  children?: IMenuItem[]
-}
-const menus = ref<IMenu[]>([
-  {
-    title: '错误页面',
-    icon: 'fab fa-behance-square',
-    active: true,
-    children: [{ title: '404错误页面', active: true }, { title: '500错误页面' }, { title: '触发异常' }]
-  },
-  {
-    title: '编辑器',
-    icon: 'fas fa-pen-to-square',
-    children: [{ title: 'Markdown编辑器' }, { title: '富文本编辑器' }]
-  }
-])
+/** 重置状态 - 隐藏菜单 */
+const reset = (pRoute: RouteRecordNormalized) => {
+  routerStore.routes.forEach(route => {
+    if (route !== pRoute) {
+      route.meta.isClick = false
+    }
 
-// 菜单点击事件
-const handle = (pmenu: IMenuItem, cmenu?: IMenuItem) => {
-  // 先隐藏所有菜单
-  if (!pmenu.active) {
-    menus.value.forEach(pmenu => (pmenu.active = false))
+    route.children.forEach(route => {
+      if (route.meta) {
+        route.meta.isClick = false
+        console.log('rest=>', route.meta.isClick)
+      }
+    })
+  })
+}
+
+/** 菜单点击事件 */
+const handle = (pRoute: RouteRecordNormalized, cRoute?: RouteRecordRaw) => {
+  reset(pRoute)
+  pRoute.meta.isClick = cRoute ? true : !pRoute.meta.isClick
+  if (cRoute && cRoute.meta) {
+    cRoute.meta.isClick = true
+    routeService.push(cRoute)
   }
-  // 再显示当前菜单
-  pmenu.active = !pmenu.active
 }
 </script>
 
@@ -44,18 +41,24 @@ const handle = (pmenu: IMenuItem, cmenu?: IMenuItem) => {
 
     <!-- 菜单 -->
     <div class="menu">
-      <dl @click="handle(menu)" v-for="(menu, index) of menus" :key="index">
-        <dt>
+      <dl v-for="(route, index) of routerStore.routes" :key="index">
+        <dt @click="handle(route)">
           <section>
-            <i :class="menu.icon"></i>
-            <span>{{ menu.title }}</span>
+            <i :class="route.meta.icon"></i>
+            <span>{{ route.meta.title }}</span>
           </section>
           <section>
-            <i class="fas fa-angle-down duration-300" :class="{ 'rotate-180': menu.active }"></i>
+            <i class="fas fa-angle-down duration-300" :class="{ 'rotate-180': route.meta.isClick }"></i>
           </section>
         </dt>
-        <dd v-show="menu.active" v-for="(cmenu, index) of menu.children" :key="index" :class="{ active: cmenu.active }">
-          {{ cmenu.title }}
+        <dd
+          v-show="route.meta.isClick"
+          v-for="(childRoute, index) of route.children"
+          :class="{ active: childRoute.meta?.isClick }"
+          :key="index"
+          @click="handle(route, childRoute)"
+        >
+          {{ childRoute.meta?.title }}
         </dd>
       </dl>
     </div>

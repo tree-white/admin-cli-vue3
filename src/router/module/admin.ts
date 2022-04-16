@@ -8,6 +8,7 @@ export default {
     {
       name: 'adminHome',
       path: 'home',
+      meta: { auth: true },
       component: () => import('@/views/admin/home.vue')
     }
   ]

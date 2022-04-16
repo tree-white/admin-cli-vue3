@@ -70,7 +70,7 @@ const cards = ref<ICard[]>([
       <template #header>
         <div class="flex items-center justify-between">
           {{ card.title }}
-          <el-tag type="danger" size="mini" effect="dark">月</el-tag>
+          <el-tag type="danger" size="small" effect="dark">月</el-tag>
         </div>
       </template>
 

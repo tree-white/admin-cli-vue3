@@ -6,7 +6,6 @@ export default function autoloadModuleRoutes() {
 
   const routes = [] as RouteRecordRaw[]
   Object.keys(modules).forEach(key => {
-    console.log(key)
     routes.push(modules[key].default)
   })
 

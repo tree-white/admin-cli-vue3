@@ -5,38 +5,43 @@ import { store } from '@/utils'
 import { RouteLocationNormalized, Router } from 'vue-router'
 
 class Guard {
-	constructor(private router: Router) {}
+  constructor(private router: Router) {}
 
-	// 执行路由守卫
-	public run() {
-		this.router.beforeEach((to, from) => {
-			// 获取Token
-			const token = store.get('token')?.token
-			// 1.登录处理
-			console.log('to=>', to.meta)
-			if (this.isLogin(to, token) === false) {
-				return { name: 'login' }
-			}
+  // 执行路由守卫
+  public run() {
+    this.router.beforeEach(this.beforeEach.bind(this))
+  }
 
-			if (this.isGuest(to, token) === false) {
-				return from
-			}
+  // 路由拦截
+  private beforeEach(to: RouteLocationNormalized, from: RouteLocationNormalized) {
+    // 1.登录处理
+    if (this.isLogin(to) === false) {
+      return { name: 'login' }
+    }
 
-			// 2.权限处理
-		})
-	}
+    if (this.isGuest(to) === false) {
+      return from
+    }
 
-	// 判断是否需要登录
-	private isLogin(route: RouteLocationNormalized, token: string | undefined) {
-		return Boolean(!route.meta.auth || (route.meta.auth && token))
-	}
+    // todo 2.权限处理
+  }
 
-	// 判断是否为游客
-	private isGuest(route: RouteLocationNormalized, token: string | undefined) {
-		return Boolean(!route.meta.guest || (route.meta.guest && !token))
-	}
+  // 获取Token
+  private getToken() {
+    return store.get('token')?.token
+  }
+
+  // 是否需要登录访问
+  private isLogin(route: RouteLocationNormalized) {
+    return Boolean(!route.meta.auth || (route.meta.auth && this.getToken()))
+  }
+
+  // 是否为游客访问
+  private isGuest(route: RouteLocationNormalized) {
+    return Boolean(!route.meta.guest || (route.meta.guest && !this.getToken()))
+  }
 }
 
 export default (router: Router) => {
-	new Guard(router).run()
+  new Guard(router).run()
 }
