@@ -1,7 +1,7 @@
 import config from '../../package.json'
 const { name: projectName } = config
 
-const getProKey = (name: string): string => `${projectName}-${name}`
+const getProKey = (name: string): string => `${projectName}_${name}`
 
 export interface IData {
   expire?: number

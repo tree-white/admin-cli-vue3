@@ -5,6 +5,7 @@ import { CacheEnum } from './../enum/cacheEnum'
 import userStore from '@/store/userStore'
 import utils from '@/utils'
 import { RouteLocationNormalized, Router } from 'vue-router'
+import menuStore from '@/store/menuStore'
 
 class Guard {
   constructor(private router: Router) {}
@@ -17,14 +18,9 @@ class Guard {
   // 路由拦截
   private async beforeEach(to: RouteLocationNormalized, from: RouteLocationNormalized) {
     // 1.登录处理
-    if (this.isLogin(to) === false) {
-      return { name: 'login' }
-    }
-
-    if (this.isGuest(to) === false) {
-      return from
-    }
-    // 如果已登录，获取用户信息后才会加载页面
+    if (this.isLogin(to) === false) return { name: 'login' }
+    if (this.isGuest(to) === false) return from
+    // 2.如果已登录，获取用户信息后才会加载页面
     await this.getUserInfo()
 
     // todo 2.权限处理

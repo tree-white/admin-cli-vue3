@@ -1,33 +1,32 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import menuStore from '@/store/menuStore'
+import menuService from '@/composables/menu'
 
-const links = ref<{ title: string }[]>([
-  { title: '编辑器' },
-  { title: '订单列表' },
-  { title: '用户管理' },
-  { title: '销售总额' },
-  { title: '编辑器' },
-  { title: '订单列表' },
-  { title: '用户管理' },
-  { title: '销售总额' },
-  { title: '编辑器' },
-  { title: '订单列表' },
-  { title: '用户管理' },
-  { title: '销售总额' }
-])
+// const { historyMenus, removeHistoryMenu } = menuStore()
+const { removeHistoryMenu } = menuStore()
+
+const historyMenus = menuService.history
 </script>
 
 <template>
-  <div class="bg-gray-50 px-5 py-3 grid-flow-col gap-2 justify-start hidden md:grid border-t border-b shadow-sm">
-    <a
-      href=""
-      v-for="(link, index) of links"
+  <div
+    v-show="historyMenus.length"
+    class="bg-gray-50 px-5 py-3 grid-flow-col gap-2 justify-start hidden md:grid border-t border-b shadow-sm cursor-pointer"
+  >
+    <div
+      v-for="(menu, index) of historyMenus"
       :key="index"
-      class="bg-white py-2 px-3 rounded-md text-sm text-gray-600 border hover:shadow-md hover:scale-105 hover:bg-violet-400 hover:text-white duration-300"
+      class="bg-white py-2 px-3 rounded-md text-sm text-gray-600 border hover:shadow-md hover:scale-105 duration-300"
+      :class="{ 'bg-violet-400 !text-white': menu.route === $route.name }"
     >
-      {{ link.title }}
-      <i class="fas fa-times ml-1 hover:rotate-180 duration-300"></i>
-    </a>
+      <router-link :to="{ name: menu.route }"> {{ menu.title }}</router-link>
+
+      <i
+        v-show="menu.route === $route.name"
+        class="fas fa-times ml-2 hover:rotate-180 duration-300 hover:text-yellow-400"
+        @click="removeHistoryMenu(menu)"
+      ></i>
+    </div>
   </div>
 </template>
 
