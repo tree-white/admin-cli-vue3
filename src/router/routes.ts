@@ -16,6 +16,11 @@ const routes = [
     path: '/register',
     name: 'register',
     component: () => import('@/views/auth/register.vue')
+  },
+  {
+    path: '/:any(.*)',
+    name: 'notFound',
+    component: () => import('@/views/error/404.vue')
   }
 ] as RouteRecordRaw[]
 

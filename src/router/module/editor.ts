@@ -4,7 +4,7 @@ export default {
   name: 'editor',
   path: '/editor',
   component: () => import('@/layouts/admin.vue'),
-  meta: { title: '编辑器', icon: 'fas fa-edit', show: true },
+  meta: { title: '编辑器', icon: 'fas fa-edit', show: true, auth: true },
   children: [
     {
       name: 'markdown',

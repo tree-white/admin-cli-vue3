@@ -1,7 +1,9 @@
 /**
  * 路由守卫
  */
-import { store } from '@/utils'
+import { CacheEnum } from './../enum/cacheEnum'
+import userStore from '@/store/userStore'
+import utils from '@/utils'
 import { RouteLocationNormalized, Router } from 'vue-router'
 
 class Guard {
@@ -13,7 +15,7 @@ class Guard {
   }
 
   // 路由拦截
-  private beforeEach(to: RouteLocationNormalized, from: RouteLocationNormalized) {
+  private async beforeEach(to: RouteLocationNormalized, from: RouteLocationNormalized) {
     // 1.登录处理
     if (this.isLogin(to) === false) {
       return { name: 'login' }
@@ -22,13 +24,22 @@ class Guard {
     if (this.isGuest(to) === false) {
       return from
     }
+    // 如果已登录，获取用户信息后才会加载页面
+    await this.getUserInfo()
 
     // todo 2.权限处理
   }
 
+  // 获取用户信息
+  private getUserInfo() {
+    if (this.getToken()) {
+      return userStore().getUserInfo()
+    }
+  }
+
   // 获取Token
   private getToken() {
-    return store.get('token')?.token
+    return utils.store.get(CacheEnum.TOKEN_NAME)?.token
   }
 
   // 是否需要登录访问
