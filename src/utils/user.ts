@@ -10,8 +10,9 @@ export async function login(values: ILoginData) {
   } = await userApi.login(values)
   // 存储token
   utils.store.set(CacheEnum.TOKEN_NAME, { token })
-  // 跳转到首页
-  router.push({ name: 'home' })
+  // 跳转到首页或者历史页面
+  const name = utils.store.get(CacheEnum.REDIRECT_ROUTE_NAME) ?? 'home'
+  router.push({ name })
 }
 
 export function logout() {

@@ -42,9 +42,13 @@ class Guard {
     return utils.store.get(CacheEnum.TOKEN_NAME)?.token
   }
 
-  // 是否需要登录访问
+  // 是否为登录用户访问
   private isLogin(route: RouteLocationNormalized) {
-    return Boolean(!route.meta.auth || (route.meta.auth && this.getToken()))
+    const state = Boolean(!route.meta.auth || (route.meta.auth && this.getToken()))
+    if (state === false) {
+      utils.store.set(CacheEnum.REDIRECT_ROUTE_NAME, route.name)
+    }
+    return state
   }
 
   // 是否为游客访问
