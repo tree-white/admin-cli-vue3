@@ -1,8 +1,13 @@
 <script setup lang="ts">
 import { IMenu } from '#/menu'
 import router from '@/router'
-import menuStore from '@/store/menuStore'
-const { menus } = menuStore()
+
+// 使用独立的composables菜单
+import menuService from '@/composables/menu'
+
+// -------------------------------
+// import menuStore from '@/store/menuStore'
+// const { menus } = menuStore()
 
 /** 重置状态 - 隐藏菜单 */
 const reset = (pMenu: IMenu) => {
@@ -40,8 +45,8 @@ const handle = (pMenu: IMenu, cMenu?: IMenu) => {
 
     <!-- 菜单 -->
     <div class="menu">
-      <dl v-for="(menu, index) of menus" :key="index">
-        <dt @click="handle(menu)">
+      <dl v-for="(menu, index) of menuService.menus.value" :key="index">
+        <dt @click="menu.isClick = true">
           <section>
             <i :class="menu.icon"></i>
             <span>{{ menu.title }}</span>
@@ -55,7 +60,7 @@ const handle = (pMenu: IMenu, cMenu?: IMenu) => {
           v-for="(childMenu, index) of menu.children"
           :class="{ active: childMenu.isClick }"
           :key="index"
-          @click="handle(menu, childMenu)"
+          @click="$router.push({ name: childMenu.route })"
         >
           {{ childMenu.title }}
         </dd>

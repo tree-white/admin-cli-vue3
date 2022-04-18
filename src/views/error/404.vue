@@ -1,8 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <!-- component -->
-  <main class="h-screen w-full flex flex-col justify-center items-center bg-[#1A2238]">
+  <div class="h-screen w-full flex flex-col justify-center items-center bg-[#1A2238]">
     <h1 class="text-9xl font-extrabold text-white tracking-widest">404</h1>
     <div class="bg-[#FF6A3D] px-2 text-sm rounded rotate-12 absolute">访问的页面不存在</div>
     <button class="mt-5">
@@ -18,7 +17,7 @@
         </span>
       </a>
     </button>
-  </main>
+  </div>
 </template>
 
 <style lang="scss" scoped></style>

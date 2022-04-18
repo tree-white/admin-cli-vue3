@@ -15,19 +15,26 @@ onBeforeRouteUpdate(to => {
 </script>
 
 <template>
-  <div class="admin min-h-screen max-w-screen flex">
+  <div class="admin w-screen min-h-screen grid grid-cols-[auto_1fr]">
     <!-- 左侧菜单 -->
-    <!-- <Menu class="hidden md:block" /> -->
+    <Menu class="hidden md:block" />
 
     <!-- 右侧内容 -->
-    <div class="content flex-1 bg-gray-100">
-      <Navbar />
-      <HistoryLink />
-      <div class="m-5">
+    <div class="content bg-gray-100 grid grid-rows-[auto_1fr]">
+      <div>
+        <Navbar />
+        <HistoryLink />
+      </div>
+      <div class="m-5 relative overflow-y-auto">
         <router-view #default="{ Component }">
-          <Transition enter-active-class="animate__animated animate__bounceInRight">
-            <Component :is="Component" />
-          </Transition>
+          <transition
+            appear
+            class="animate__animated"
+            enter-active-class="animate__fadeInRight"
+            leave-active-class="animate__fadeOutLeft"
+          >
+            <Component :is="Component" class="absolute w-full" />
+          </transition>
         </router-view>
       </div>
     </div>
