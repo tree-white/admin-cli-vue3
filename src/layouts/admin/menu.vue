@@ -4,12 +4,14 @@ import router from '@/router'
 
 // 使用独立的composables菜单
 import menuService from '@/composables/menu'
+import { useRoute } from 'vue-router'
+import { watch } from 'vue'
 
 // -------------------------------
 // import menuStore from '@/store/menuStore'
 // const { menus } = menuStore()
 
-/** 重置状态 - 隐藏菜单 */
+/** 重置状态 - 隐藏菜单(废弃) */
 const reset = (pMenu: IMenu) => {
   menus.forEach(menu => {
     if (menu !== pMenu) {
@@ -24,7 +26,7 @@ const reset = (pMenu: IMenu) => {
   })
 }
 
-/** 菜单点击事件 */
+/** 菜单点击事件(废弃) */
 const handle = (pMenu: IMenu, cMenu?: IMenu) => {
   reset(pMenu)
   pMenu.isClick = cMenu ? true : !pMenu.isClick
@@ -33,18 +35,35 @@ const handle = (pMenu: IMenu, cMenu?: IMenu) => {
     cMenu.route && router.push({ name: cMenu.route })
   }
 }
+
+const route = useRoute()
+menuService.setCurrentMenu(route)
+watch(route, () => menuService.setCurrentMenu(route), { immediate: true })
 </script>
 
 <template>
-  <div class="menus w-[200px] bg-gray-800 text-white p-4">
+  <div class="menus w-[200px] bg-gray-800 text-white">
     <!-- Logo -->
-    <div class="logo flex items-center cursor-pointer">
+    <div class="logo flex items-center cursor-pointer p-4">
       <img src="/images/logo.png" alt="" class="w-10 h-10 p-1 rounded-full object-cover bg-white" />
       <div class="flex-1 text-center">Trwite后台管理</div>
     </div>
 
     <!-- 菜单 -->
     <div class="menu">
+      <!-- 仪表盘 -->
+      <dl>
+        <dt
+          @click="$router.push({ name: 'adminHome' })"
+          :class="{ 'bg-violet-600 text-white p-3': $route.name == 'adminHome' }"
+        >
+          <section>
+            <i class="fas fa-home"></i>
+            <span>仪表盘</span>
+          </section>
+        </dt>
+      </dl>
+      <!-- 遍历菜单 -->
       <dl v-for="(menu, index) of menuService.menus.value" :key="index">
         <dt @click="menu.isClick = true">
           <section>
@@ -75,7 +94,7 @@ const handle = (pMenu: IMenu, cMenu?: IMenu) => {
     @apply text-gray-300 text-sm;
 
     dt {
-      @apply text-sm mt-6 flex justify-between cursor-pointer items-center hover:text-white duration-300;
+      @apply text-sm p-4 flex justify-between cursor-pointer items-center hover:text-white duration-300;
 
       section {
         @apply flex items-center;

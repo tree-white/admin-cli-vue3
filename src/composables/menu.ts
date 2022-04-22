@@ -3,6 +3,7 @@ import { CacheEnum } from '@/enum/cacheEnum'
 import { IMenu } from '#/menu'
 import { ref } from 'vue'
 import router from '@/router'
+import { RouteLocationNormalizedLoaded } from 'vue-router'
 
 class Menu {
   public menus = ref<IMenu[]>([])
@@ -11,6 +12,20 @@ class Menu {
   constructor() {
     this.menus.value = this.getMenusByRoute()
     this.history.value = utils.store.get(CacheEnum.HISTORY_MENUS) ?? []
+  }
+
+  /** 关闭菜单 */
+  setCurrentMenu(route: RouteLocationNormalizedLoaded) {
+    this.menus.value.forEach(menu => {
+      menu.isClick = false
+      menu.children?.forEach(cMenu => {
+        cMenu.isClick = false
+        if (cMenu.route == route.name) {
+          menu.isClick = true
+          cMenu.isClick = true
+        }
+      })
+    })
   }
 
   /** 根据路由获取菜单 */

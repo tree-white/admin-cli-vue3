@@ -18,6 +18,7 @@ const { removeHistoryMenu } = menuStore()
       :class="{ 'bg-violet-400 !text-white': menu.route === $route.name }"
     >
       <router-link :to="{ name: menu.route }"> {{ menu.title }}</router-link>
+
       <i
         v-show="menu.route === $route.name"
         class="fas fa-times ml-2 hover:rotate-180 duration-300 hover:text-yellow-400"

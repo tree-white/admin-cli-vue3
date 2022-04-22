@@ -26,15 +26,15 @@ onBeforeRouteUpdate(to => {
         <HistoryLink />
       </div>
       <div class="m-5 relative overflow-y-auto">
-        <router-view #default="{ Component }">
-          <transition
+        <router-view #default="{ Component, route }">
+          <Transition
             appear
             class="animate__animated"
-            enter-active-class="animate__fadeInRight"
-            leave-active-class="animate__fadeOutLeft"
+            :enter-active-class="route.meta.enterClass ?? 'animate__fadeInRight'"
+            :leave-active-class="route.meta.leaveClass ?? 'animate__fadeOutLeft'"
           >
             <Component :is="Component" class="absolute w-full" />
-          </transition>
+          </Transition>
         </router-view>
       </div>
     </div>

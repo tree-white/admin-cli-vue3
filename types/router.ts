@@ -10,5 +10,8 @@ declare module 'vue-router' {
     /** 访问权限 */
     permissions?: string[]
     menu?: IMenu
+    /** 动画 */
+    enterClass?: string
+    leaveClass?: string
   }
 }
