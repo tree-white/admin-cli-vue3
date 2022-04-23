@@ -1,16 +1,26 @@
 <script setup lang="ts">
 import userStore from '@/store/userStore'
 import utils from '@/utils'
+import menuService from '@/composables/menu'
 const userData = userStore()
 </script>
 
 <template>
   <div class="bg-white p-4 flex justify-between items-center">
-    <!-- 面包屑 -->
-    <el-breadcrumb separator="/">
-      <el-breadcrumb-item :to="{ path: '/' }">编辑器</el-breadcrumb-item>
-      <el-breadcrumb-item>富文本编辑器</el-breadcrumb-item>
-    </el-breadcrumb>
+    <div class="flex items-center">
+      <!-- 控制菜单组件 -->
+      <div @click="menuService.toggleState">
+        <i
+          class="fas mr-2 text-gray-700 cursor-pointer hover:text-violet-700 hover:scale-105 duration-300"
+          :class="`fa-square-caret-${menuService.close.value ? 'right' : 'left'}`"
+        ></i>
+      </div>
+      <!-- 面包屑 -->
+      <el-breadcrumb separator="/">
+        <el-breadcrumb-item :to="{ path: '/' }">编辑器</el-breadcrumb-item>
+        <el-breadcrumb-item>富文本编辑器</el-breadcrumb-item>
+      </el-breadcrumb>
+    </div>
 
     <!-- 右侧头像 -->
     <div class="flex justify-center items-center relative group cursor-pointer">

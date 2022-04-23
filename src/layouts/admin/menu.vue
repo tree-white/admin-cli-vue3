@@ -42,11 +42,11 @@ watch(route, () => menuService.setCurrentMenu(route), { immediate: true })
 </script>
 
 <template>
-  <div class="menus w-[200px] bg-gray-800 text-white">
+  <div class="menus w-[200px] bg-gray-800 text-white" :class="{ close: menuService.close.value }">
     <!-- Logo -->
     <div class="logo flex items-center cursor-pointer p-4">
       <img src="/images/logo.png" alt="" class="w-10 h-10 p-1 rounded-full object-cover bg-white" />
-      <div class="flex-1 text-center">Trwite后台管理</div>
+      <span class="flex-1 text-center">Trwite后台管理</span>
     </div>
 
     <!-- 菜单 -->
@@ -110,6 +110,35 @@ watch(route, () => menuService.setCurrentMenu(route), { immediate: true })
 
       &.active {
         @apply bg-violet-500 text-white hover:bg-violet-400 duration-300 cursor-pointer;
+      }
+    }
+  }
+}
+
+.close {
+  width: auto;
+
+  & .logo {
+    span {
+      @apply hidden;
+    }
+  }
+
+  & .menu {
+    dt {
+      @apply justify-center;
+      section {
+        &:first-child {
+          i {
+            @apply mr-0;
+          }
+          span {
+            @apply hidden;
+          }
+        }
+        &:nth-child(2) {
+          @apply hidden;
+        }
       }
     }
   }

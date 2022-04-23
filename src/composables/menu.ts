@@ -6,15 +6,24 @@ import router from '@/router'
 import { RouteLocationNormalizedLoaded } from 'vue-router'
 
 class Menu {
+  // 菜单
   public menus = ref<IMenu[]>([])
+  // 历史菜单
   public history = ref<IMenu[]>([])
+  // 菜单组件开关
+  public close = ref(false)
 
   constructor() {
     this.menus.value = this.getMenusByRoute()
     this.history.value = utils.store.get(CacheEnum.HISTORY_MENUS) ?? []
   }
+  /** 开启/关闭菜单组件 */
+  toggleState() {
+    this.close.value = !this.close.value
+    console.log(this.close.value)
+  }
 
-  /** 关闭菜单 */
+  /** 选择菜单 */
   setCurrentMenu(route: RouteLocationNormalizedLoaded) {
     this.menus.value.forEach(menu => {
       menu.isClick = false
