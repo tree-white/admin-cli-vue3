@@ -58,54 +58,56 @@ const cards = ref<ICard[]>([
 </script>
 
 <template>
-  <!-- 统计模块 -->
-  <div class="grid gap-3 md:grid-cols-4">
-    <el-card
-      shadow="hover"
-      :body-style="{ padding: '20px' }"
-      v-for="card of cards"
-      :key="card.id"
-      class="cursor-pointer"
-    >
-      <template #header>
-        <div class="flex items-center justify-between">
-          {{ card.title }}
-          <el-tag type="danger" size="small" effect="dark">月</el-tag>
-        </div>
-      </template>
+  <div>
+    <!-- 统计模块 -->
+    <div class="grid gap-3 md:grid-cols-4">
+      <el-card
+        shadow="hover"
+        :body-style="{ padding: '20px' }"
+        v-for="card of cards"
+        :key="card.id"
+        class="cursor-pointer"
+      >
+        <template #header>
+          <div class="flex items-center justify-between">
+            {{ card.title }}
+            <el-tag type="danger" size="small" effect="dark">月</el-tag>
+          </div>
+        </template>
 
-      <section class="mt-3 flex justify-between items-center">
-        {{ card.price }} <i :class="[card.icon, card.iconColor]" class="text-5xl"></i>
-      </section>
+        <section class="mt-3 flex justify-between items-center">
+          {{ card.price }} <i :class="[card.icon, card.iconColor]" class="text-5xl"></i>
+        </section>
 
-      <section class="flex justify-between items-center text-base mt-6">
-        {{ card.totalTitle }}
-        <span>{{ card.total }}人</span>
-      </section>
-    </el-card>
-  </div>
+        <section class="flex justify-between items-center text-base mt-6">
+          {{ card.totalTitle }}
+          <span>{{ card.total }}人</span>
+        </section>
+      </el-card>
+    </div>
 
-  <!-- ECharts 图表 -->
-  <div class="mt-5 grid md:grid-cols-2 gap-3">
-    <el-card shadow="hover" :body-style="{ padding: '20px' }">
-      <template #header>
-        <div>
-          <span>用户统计</span>
-        </div>
-      </template>
-      <!-- card body -->
-      <div id="echart1" class="w-full h-72"></div>
-    </el-card>
+    <!-- ECharts 图表 -->
+    <div class="mt-5 grid md:grid-cols-2 gap-3">
+      <el-card shadow="hover" :body-style="{ padding: '20px' }">
+        <template #header>
+          <div>
+            <span>用户统计</span>
+          </div>
+        </template>
+        <!-- card body -->
+        <div id="echart1" class="w-full h-72"></div>
+      </el-card>
 
-    <el-card shadow="hover" :body-style="{ padding: '20px' }">
-      <template #header>
-        <div>
-          <span>销售额</span>
-        </div>
-      </template>
-      <!-- card body -->
-      <div id="echart2" class="w-full h-72"></div>
-    </el-card>
+      <el-card shadow="hover" :body-style="{ padding: '20px' }">
+        <template #header>
+          <div>
+            <span>销售额</span>
+          </div>
+        </template>
+        <!-- card body -->
+        <div id="echart2" class="w-full h-72"></div>
+      </el-card>
+    </div>
   </div>
 </template>
 

@@ -17,6 +17,15 @@ class Menu {
     this.menus.value = this.getMenusByRoute()
     this.history.value = utils.store.get(CacheEnum.HISTORY_MENUS) ?? []
   }
+
+  /** 切换菜单 */
+  toggleParentMenu(menu: IMenu) {
+    this.menus.value.forEach(m => {
+      m.isClick = false
+      if (m == menu) m.isClick = true
+    })
+  }
+
   /** 开启/关闭菜单组件 */
   toggleState() {
     this.close.value = !this.close.value

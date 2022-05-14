@@ -15,12 +15,12 @@ onBeforeRouteUpdate(to => {
 </script>
 
 <template>
-  <div class="admin w-screen min-h-screen grid grid-cols-[auto_1fr]">
+  <div class="admin w-screen min-h-screen md:grid grid-cols-[auto_1fr]">
     <!-- 左侧菜单 -->
-    <Menu class="hidden md:block" />
+    <Menu />
 
     <!-- 右侧内容 -->
-    <div class="content bg-gray-100 grid grid-rows-[auto_1fr]">
+    <div class="content h-screen bg-gray-100 grid grid-rows-[auto_1fr]">
       <div>
         <Navbar />
         <HistoryLink />
