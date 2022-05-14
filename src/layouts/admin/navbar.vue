@@ -3,6 +3,11 @@ import userStore from '@/store/userStore'
 import utils from '@/utils'
 import menuService from '@/composables/menu'
 const userData = userStore()
+
+// 全屏操作
+const fullScreen = () => {
+  document.documentElement.requestFullscreen()
+}
 </script>
 
 <template>
@@ -22,10 +27,17 @@ const userData = userStore()
       </el-breadcrumb>
     </div>
 
-    <!-- 右侧头像 -->
+    <!-- 右侧内容 -->
     <div class="flex justify-center items-center relative group cursor-pointer">
+      <!-- 全屏按钮 -->
+      <i class="fas fa-desktop mr-2" @click="fullScreen"></i>
+
+      <!-- 头像 -->
       <img :src="userData.info?.avatar" alt="" class="w-8 h-8 rounded-full object-cover" />
+
+      <!-- 用户名 -->
       <span class="ml-1 text-sm text-gray-600">{{ userData.info?.name }}</span>
+
       <!-- 弹出菜单 -->
       <section
         class="group-hover:block hidden absolute top-full bg-white shadow-sm px-5 whitespace-nowrap border rounded-md"
