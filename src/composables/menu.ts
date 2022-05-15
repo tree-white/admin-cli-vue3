@@ -3,7 +3,7 @@ import { CacheEnum } from '@/enum/cacheEnum'
 import { IMenu } from '#/menu'
 import { ref } from 'vue'
 import router from '@/router'
-import { RouteLocationNormalizedLoaded } from 'vue-router'
+import { RouteLocationNormalized, RouteLocationNormalizedLoaded } from 'vue-router'
 
 class Menu {
   // 菜单
@@ -59,6 +59,31 @@ class Menu {
 
         return menu
       })
+  }
+
+  /** 添加历史菜单 */
+  addHistoryMenu(route: RouteLocationNormalized) {
+    if (!route.meta?.menu) return
+    // 生成菜单
+    const menu: IMenu = { ...route.meta?.menu, route: route.name as string }
+    // 是否已存在
+    const isHas = this.history.value.some(menu => menu.route == route.name)
+    // 添加菜单
+    if (!isHas) this.history.value.push(menu)
+    // 限制历史菜单只记录10个
+    if (this.history.value.length > 10) this.history.value.shift()
+    // 存储到本地
+    utils.store.set(CacheEnum.HISTORY_MENUS, this.history.value)
+  }
+
+  /** 删除历史菜单 */
+  removeHistoryMenu(menu: IMenu) {
+    const index = this.history.value.indexOf(menu)
+    this.history.value.splice(index, 1)
+    utils.store.set(CacheEnum.HISTORY_MENUS, this.history.value)
+    const count = this.history.value.length
+    console.log('route=>', router)
+    router.push({ name: count > 0 ? this.history.value[count - 1].route : 'adminHome' })
   }
 }
 

@@ -2,16 +2,18 @@
 import Menu from './admin/menu.vue'
 import Navbar from './admin/navbar.vue'
 import HistoryLink from './admin/historyLink.vue'
-import menuStore from '@/store/menuStore'
-import { onBeforeRouteUpdate } from 'vue-router'
+import { useRoute } from 'vue-router'
+import { watch } from 'vue'
+import menu from '@/composables/menu'
+const route = useRoute()
 
-const menu = menuStore()
-menu.init()
-onBeforeRouteUpdate(to => {
-  console.log('更新了')
-  // 添加历史菜单
-  menu.addHistoryMenu(to)
-})
+watch(
+  route,
+  () => {
+    menu.addHistoryMenu(route)
+  },
+  { immediate: true }
+)
 </script>
 
 <template>
