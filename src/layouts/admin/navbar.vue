@@ -28,33 +28,39 @@ const fullScreen = () => {
     </div>
 
     <!-- 右侧内容 -->
-    <div class="flex justify-center items-center relative group cursor-pointer">
+    <div class="flex justify-center gap-4 items-center relative cursor-pointer">
+      <!-- 通知组件 -->
+      <Notification />
+
       <!-- 全屏按钮 -->
-      <i class="fas fa-desktop mr-2" @click="fullScreen"></i>
+      <i class="fas fa-desktop" @click="fullScreen"></i>
 
-      <!-- 头像 -->
-      <img :src="userData.info?.avatar" alt="" class="w-8 h-8 rounded-full object-cover" />
+      <!-- 右侧功能 -->
+      <div class="flex justify-center items-center relative group">
+        <!-- 头像 -->
+        <img :src="userData.info?.avatar" alt="" class="w-8 h-8 rounded-full object-cover" />
 
-      <!-- 用户名 -->
-      <span class="ml-1 text-sm text-gray-600">{{ userData.info?.name }}</span>
+        <!-- 用户名 -->
+        <span class="ml-1 text-sm text-gray-600">{{ userData.info?.name }}</span>
 
-      <!-- 弹出菜单 -->
-      <section
-        class="group-hover:block hidden absolute top-full bg-white shadow-sm px-5 whitespace-nowrap border rounded-md"
-      >
-        <div class="flex items-center border-b py-2">
-          <i class="fa-solid fa-person-shelter"></i>
-          <span class="text-xs text-gray-600 ml-3">个人中心</span>
-        </div>
-        <div class="flex items-center border-b py-2">
-          <i class="fas fa-square-rss"></i>
-          <span class="text-xs text-gray-600 ml-3">用户管理</span>
-        </div>
-        <div class="flex items-center py-2" @click="utils.user.logout">
-          <i class="fa-solid fa-right-from-bracket"></i>
-          <span class="text-xs text-gray-600 ml-3">退出登录</span>
-        </div>
-      </section>
+        <!-- 弹出菜单 -->
+        <section
+          class="group-hover:block hidden absolute z-10 top-full bg-white shadow-sm px-5 whitespace-nowrap border rounded-md"
+        >
+          <div class="flex items-center border-b py-2">
+            <i class="fa-solid fa-person-shelter"></i>
+            <span class="text-xs text-gray-600 ml-3">个人中心</span>
+          </div>
+          <div class="flex items-center border-b py-2">
+            <i class="fas fa-square-rss"></i>
+            <span class="text-xs text-gray-600 ml-3">用户管理</span>
+          </div>
+          <div class="flex items-center py-2" @click="utils.user.logout">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span class="text-xs text-gray-600 ml-3">退出登录</span>
+          </div>
+        </section>
+      </div>
     </div>
   </div>
 </template>
