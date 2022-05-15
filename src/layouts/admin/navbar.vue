@@ -21,10 +21,7 @@ const fullScreen = () => {
         ></i>
       </div>
       <!-- 面包屑 -->
-      <el-breadcrumb separator="/">
-        <el-breadcrumb-item :to="{ path: '/' }">编辑器</el-breadcrumb-item>
-        <el-breadcrumb-item>富文本编辑器</el-breadcrumb-item>
-      </el-breadcrumb>
+      <Breadcrumb class="hidden md:block" />
     </div>
 
     <!-- 右侧内容 -->

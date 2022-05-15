@@ -12,6 +12,8 @@ class Menu {
   public history = ref<IMenu[]>([])
   // 菜单组件开关
   public close = ref(false)
+  // 记录路由
+  public route = ref(null as null | RouteLocationNormalized)
 
   constructor() {
     this.menus.value = this.getMenusByRoute()
@@ -64,6 +66,8 @@ class Menu {
   /** 添加历史菜单 */
   addHistoryMenu(route: RouteLocationNormalized) {
     if (!route.meta?.menu) return
+    this.route.value = route
+    console.log('route=>', route)
     // 生成菜单
     const menu: IMenu = { ...route.meta?.menu, route: route.name as string }
     // 是否已存在
