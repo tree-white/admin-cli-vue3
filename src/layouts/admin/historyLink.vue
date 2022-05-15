@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import menuStore from '@/store/menuStore'
 import menuService from '@/composables/menu'
-const { removeHistoryMenu } = menuStore()
 </script>
 
 <template>
@@ -20,7 +18,7 @@ const { removeHistoryMenu } = menuStore()
       <i
         v-show="menu.route === $route.name"
         class="fas fa-times ml-2 hover:rotate-180 duration-300 hover:text-yellow-400"
-        @click="removeHistoryMenu(menu)"
+        @click="menuService.removeHistoryMenu(menu)"
       ></i>
     </div>
   </div>
