@@ -1,7 +1,7 @@
 // test.ts
 
 import { Random } from 'mockjs'
-import { MockMethod } from 'vite-plugin-mock'
+import { MockMethod, RespThisType } from 'vite-plugin-mock'
 export default [
   {
     url: '/api/user/info',
@@ -14,7 +14,8 @@ export default [
         result: {
           name: '木白欧巴',
           age: 18,
-          avatar: '/images/宇航员.jpg'
+          avatar: '/images/宇航员.jpg',
+          permissions: ['editor_markdown', 'article_edit']
         }
       }
     }

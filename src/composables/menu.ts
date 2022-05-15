@@ -1,9 +1,9 @@
 import utils from '@/utils'
 import { CacheEnum } from '@/enum/cacheEnum'
 import { IMenu } from '#/menu'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import router from '@/router'
-import { RouteLocationNormalized, RouteLocationNormalizedLoaded } from 'vue-router'
+import { RouteLocationNormalized, RouteLocationNormalizedLoaded, RouteRecordRaw } from 'vue-router'
 
 class Menu {
   // 菜单
@@ -15,9 +15,23 @@ class Menu {
   // 记录路由
   public route = ref(null as null | RouteLocationNormalized)
 
-  constructor() {
+  constructor() {}
+
+  /** 更新菜单 */
+  updateMenusAndHistory() {
+    console.log('更新菜单')
     this.menus.value = this.getMenusByRoute()
-    this.history.value = utils.store.get(CacheEnum.HISTORY_MENUS) ?? []
+    console.log('menus=>', this.menus.value)
+    this.history.value = this.getHistoryMenus()
+  }
+
+  /** 获取历史菜单 */
+  getHistoryMenus() {
+    const routes = [] as RouteRecordRaw[]
+    router.getRoutes().forEach(route => routes.push(...route.children))
+    let historyMenus: IMenu[] = utils.store.get(CacheEnum.HISTORY_MENUS) ?? []
+
+    return historyMenus.filter(menu => routes.some(route => route.name == menu.route))
   }
 
   /** 切换菜单 */
@@ -50,6 +64,8 @@ class Menu {
 
   /** 根据路由获取菜单 */
   getMenusByRoute() {
+    console.log('开始执行22222222222')
+
     return router
       .getRoutes()
       .filter(route => route.children.length && route.meta.menu)
@@ -67,7 +83,6 @@ class Menu {
   addHistoryMenu(route: RouteLocationNormalized) {
     if (!route.meta?.menu) return
     this.route.value = route
-    console.log('route=>', route)
     // 生成菜单
     const menu: IMenu = { ...route.meta?.menu, route: route.name as string }
     // 是否已存在

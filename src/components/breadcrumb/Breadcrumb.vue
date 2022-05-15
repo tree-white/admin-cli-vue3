@@ -1,7 +1,7 @@
 <!-- 面包屑组件 -->
 <script setup lang="ts">
-import menu from '@/composables/menu'
-const route = menu.route.value
+import menuService from '@/composables/menu'
+const route = menuService.route.value
 </script>
 
 <template>

@@ -8,7 +8,7 @@ declare module 'vue-router' {
     /** 是否游客 */
     guest?: boolean
     /** 访问权限 */
-    permissions?: string[]
+    permission?: string
     menu?: IMenu
     /** 动画 */
     enterClass?: string

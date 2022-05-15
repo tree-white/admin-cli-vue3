@@ -4,13 +4,13 @@ import Navbar from './admin/navbar.vue'
 import HistoryLink from './admin/historyLink.vue'
 import { useRoute } from 'vue-router'
 import { watch } from 'vue'
-import menu from '@/composables/menu'
+import menuService from '@/composables/menu'
 const route = useRoute()
 
 watch(
   route,
   () => {
-    menu.addHistoryMenu(route)
+    menuService.addHistoryMenu(route)
   },
   { immediate: true }
 )

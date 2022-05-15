@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import menuStore from '@/store/menuStore'
 import menuService from '@/composables/menu'
-console.log('history=>', menuService.history.value)
-// const { historyMenus, removeHistoryMenu } = menuStore()
 const { removeHistoryMenu } = menuStore()
 </script>
 
@@ -17,7 +15,7 @@ const { removeHistoryMenu } = menuStore()
       class="bg-white py-2 px-3 rounded-md text-sm text-gray-600 border hover:shadow-md hover:scale-105 duration-300"
       :class="{ 'bg-violet-400 !text-white': menu.route === $route.name }"
     >
-      <router-link :to="{ name: menu.route }"> {{ menu.title }}</router-link>
+      <router-link :to="{ name: menu.route }">{{ menu.title }}</router-link>
 
       <i
         v-show="menu.route === $route.name"
