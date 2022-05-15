@@ -4,5 +4,7 @@ declare namespace toastui {
     getMarkdown: () => string
     getHTML: () => string
     on: (evnet: string, callback: Function) => void
+    removeHook: (type: string) => void
+    addHook: (type: string, handle: Function) => void
   }
 }

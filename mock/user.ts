@@ -1,7 +1,7 @@
 // test.ts
 
 import { Random } from 'mockjs'
-import { MockMethod, RespThisType } from 'vite-plugin-mock'
+import { MockMethod } from 'vite-plugin-mock'
 export default [
   {
     url: '/api/user/info',
