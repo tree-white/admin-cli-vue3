@@ -14,8 +14,15 @@ const props = withDefaults(defineProps<IProps>(), {
   placeholder: ''
 })
 
+const emit = defineEmits(['update:modelValue'])
+
 nextTick(() => {
-  new ToastEditor('#editor', `${props.modelValue}`, `${props.height}px`, `${props.placeholder}`)
+  const toastEditor = new ToastEditor('#editor', `${props.modelValue}`, `${props.height}px`, `${props.placeholder}`)
+  // 通过编辑器的change事件来实现响应式内容
+  toastEditor.editor.on('change', (type: string) => {
+    const content = toastEditor.editor[`get${type === 'markdown' ? 'Markdown' : 'HTML'}`]()
+    emit('update:modelValue', content)
+  })
 })
 </script>
 
@@ -26,5 +33,10 @@ nextTick(() => {
 <style lang="scss">
 #editor {
   @apply bg-white;
+
+  // 隐藏手动切换
+  .toastui-editor-mode-switch {
+    display: none !important;
+  }
 }
 </style>
