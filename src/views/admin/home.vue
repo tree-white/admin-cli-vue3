@@ -13,8 +13,8 @@ interface ICard {
 
 nextTick(() => {
   // 初始化echarts实例
-  echarts.init(document.getElementById('echart1')).setOption(echart1)
-  echarts.init(document.getElementById('echart2')).setOption(echart2)
+  echarts.init(document.getElementById('echart1') as HTMLDivElement).setOption(echart1)
+  echarts.init(document.getElementById('echart2') as HTMLDivElement).setOption(echart2)
 })
 
 const cards = ref<ICard[]>([
@@ -76,7 +76,8 @@ const cards = ref<ICard[]>([
         </template>
 
         <section class="mt-3 flex justify-between items-center">
-          {{ card.price }} <i :class="[card.icon, card.iconColor]" class="text-5xl"></i>
+          {{ card.price }}
+          <i :class="[card.icon, card.iconColor]" class="text-5xl"></i>
         </section>
 
         <section class="flex justify-between items-center text-base mt-6">
