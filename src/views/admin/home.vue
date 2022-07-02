@@ -1,60 +1,59 @@
 <script setup lang="ts">
-import { nextTick, ref } from 'vue'
-import { echart1, echart2 } from './echart'
-interface ICard {
-  id: number
-  title: string
-  price: number
-  icon: string
-  iconColor: string
-  totalTitle: string
-  total: number
-}
-
-nextTick(() => {
-  // 初始化echarts实例
-  echarts.init(document.getElementById('echart1') as HTMLDivElement).setOption(echart1)
-  echarts.init(document.getElementById('echart2') as HTMLDivElement).setOption(echart2)
-})
-
-const cards = ref<ICard[]>([
-  {
-    id: 1,
-    title: '总人数',
-    price: 23742,
-    iconColor: 'text-violet-500',
-    icon: 'fas fa-address-card',
-    totalTitle: '总人数',
-    total: 123042
-  },
-  {
-    id: 2,
-    title: '销售额',
-    price: 123422,
-    iconColor: 'text-red-500',
-    icon: 'fab fa-bitcoin',
-    totalTitle: '总销售额',
-    total: 53433
-  },
-  {
-    id: 3,
-    title: '订单数',
-    price: 1232,
-    iconColor: 'text-green-700',
-    icon: 'fab fa-buffer',
-    totalTitle: '总订单数',
-    total: 4362
-  },
-  {
-    id: 4,
-    title: '评论数',
-    price: 8374,
-    iconColor: 'text-blue-500',
-    icon: 'fab fa-chromecast',
-    totalTitle: '总评论数',
-    total: 34564
+  import { echart1, echart2 } from './echart'
+  interface ICard {
+    id: number
+    title: string
+    price: number
+    icon: string
+    iconColor: string
+    totalTitle: string
+    total: number
   }
-])
+
+  nextTick(() => {
+    // 初始化echarts实例
+    echarts.init(document.getElementById('echart1') as HTMLDivElement).setOption(echart1)
+    echarts.init(document.getElementById('echart2') as HTMLDivElement).setOption(echart2)
+  })
+
+  const cards = ref<ICard[]>([
+    {
+      id: 1,
+      title: '总人数',
+      price: 23742,
+      iconColor: 'text-violet-500',
+      icon: 'fas fa-address-card',
+      totalTitle: '总人数',
+      total: 123042
+    },
+    {
+      id: 2,
+      title: '销售额',
+      price: 123422,
+      iconColor: 'text-red-500',
+      icon: 'fab fa-bitcoin',
+      totalTitle: '总销售额',
+      total: 53433
+    },
+    {
+      id: 3,
+      title: '订单数',
+      price: 1232,
+      iconColor: 'text-green-700',
+      icon: 'fab fa-buffer',
+      totalTitle: '总订单数',
+      total: 4362
+    },
+    {
+      id: 4,
+      title: '评论数',
+      price: 8374,
+      iconColor: 'text-blue-500',
+      icon: 'fab fa-chromecast',
+      totalTitle: '总评论数',
+      total: 34564
+    }
+  ])
 </script>
 
 <template>

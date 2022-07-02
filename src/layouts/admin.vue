@@ -1,19 +1,17 @@
 <script setup lang="ts">
-import Menu from './admin/menu.vue'
-import Navbar from './admin/navbar.vue'
-import HistoryLink from './admin/historyLink.vue'
-import { useRoute } from 'vue-router'
-import { watch } from 'vue'
-import menuService from '@/composables/menu'
-const route = useRoute()
+  import Menu from './admin/menu.vue'
+  import Navbar from './admin/navbar.vue'
+  import HistoryLink from './admin/historyLink.vue'
+  import menuService from '@/composables/menu'
+  const route = useRoute()
 
-watch(
-  route,
-  () => {
-    menuService.addHistoryMenu(route)
-  },
-  { immediate: true }
-)
+  watch(
+    route,
+    () => {
+      menuService.addHistoryMenu(route)
+    },
+    { immediate: true }
+  )
 </script>
 
 <template>
@@ -46,7 +44,7 @@ watch(
 <style lang="scss" scoped></style>
 
 <script lang="ts">
-export default {
-  route: { meta: { auth: true } }
-}
+  export default {
+    route: { meta: { auth: true } }
+  }
 </script>

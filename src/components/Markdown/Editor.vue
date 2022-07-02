@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { nextTick } from 'vue'
-import ToastEditor from './toastEditor'
+import ToastEditor from './Editor'
 
 interface IProps {
   modelValue?: string

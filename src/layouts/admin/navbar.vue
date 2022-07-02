@@ -21,13 +21,13 @@ const fullScreen = () => {
         ></i>
       </div>
       <!-- 面包屑 -->
-      <Breadcrumb class="hidden md:block" />
+      <TwBreadcrumb class="hidden md:block" />
     </div>
 
     <!-- 右侧内容 -->
     <div class="flex justify-center gap-4 items-center relative cursor-pointer">
       <!-- 通知组件 -->
-      <Notification />
+      <TwNotification />
 
       <!-- 全屏按钮 -->
       <i class="fas fa-desktop" @click="fullScreen"></i>

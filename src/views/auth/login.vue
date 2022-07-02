@@ -1,29 +1,22 @@
 <script setup lang="ts">
-import { ILoginData } from '@/apis/userApi'
-import validate from '@/plugins/validate'
-import utils from '@/utils'
-const { Form, Field, ErrorMessage } = validate
+  import validate from '@/plugins/validate'
+  import utils from '@/utils'
+  const { Form, Field, ErrorMessage } = validate
 
-// 使用yup
-// const schema = validate.yup.object().shape({
-// 	account: validate.yup.string().required().email().label('账号'),
-// 	password: validate.yup.string().required().min(3).label('密码'),
-// })
+  const schema = {
+    account: { required: true, regex: /.+@.+\..+|\d{11}/ },
+    password: { required: true, min: 3 }
+  }
 
-const schema = {
-  account: { required: true, regex: /.+@.+\..+|\d{11}/ },
-  password: { required: true, min: 3 }
-}
-
-const onSubmit = async (values: any) => {
-  utils.user.login(values)
-}
+  const onSubmit = async (values: any) => {
+    utils.user.login(values)
+  }
 </script>
 
 <script lang="ts">
-export default {
-  route: { name: 'login', meta: { guest: true } }
-}
+  export default {
+    route: { name: 'login', meta: { guest: true } }
+  }
 </script>
 
 <template>
@@ -55,14 +48,14 @@ export default {
           <ErrorMessage name="password" as="div" class="tw-error" />
         </div>
         <div>
-          <tw-button>登录</tw-button>
+          <TwButton>登录</TwButton>
           <div class="flex justify-center align-center mt-2">
             <i class="fa-brands fa-weixin bg-green-500 text-white p-1 rounded-full cursor-pointer"></i>
           </div>
           <div class="flex gap-3 justify-center mt-3">
-            <tw-link href="https://blog.treewhite.com" target="_blank">网站首页</tw-link>
-            <tw-link>注册</tw-link>
-            <tw-link>找回密码</tw-link>
+            <TwLink href="https://blog.treewhite.com" target="_blank">网站首页</TwLink>
+            <TwLink>注册</TwLink>
+            <TwLink>找回密码</TwLink>
           </div>
         </div>
       </div>
@@ -74,7 +67,7 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-form {
-  @apply bg-slate-300 h-screen flex justify-center items-center px-6;
-}
+  form {
+    @apply bg-slate-300 h-screen flex justify-center items-center px-6;
+  }
 </style>
