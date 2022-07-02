@@ -4,6 +4,7 @@ import router, { setupRouter } from '@/router'
 import { setupPlugins } from './plugins'
 import '@/styles/global.scss'
 import menuService from './composables/menu'
+import 'animate.css'
 
 async function bootstrap() {
   const app = createApp(App)
