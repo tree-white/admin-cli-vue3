@@ -1,4 +1,5 @@
 <script setup lang="ts">
+  import * as echarts from 'echarts'
   import { echart1, echart2 } from './echart'
   interface ICard {
     id: number
