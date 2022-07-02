@@ -16,28 +16,22 @@
     height: props.height
   }
   nextTick(() => {
-    const selector: wangEditor.Selector = {
-      options: {
-        el: '#wangEditorContainer',
+    const options: wangEditor.IOption = {
+      uploadImageApi: props.uploadImageApi,
+      editor: {
+        selector: '#wangEditorContainer',
         html: props.modelValue,
-        uploadImageApi: props.uploadImageApi
+        config: {
+          onChange: (editor: any) => emit('update:modelValue', editor.getHtml())
+        },
+        mode: 'default'
       },
-      config: {
-        onChange: (editor: any) => {
-          // 当编辑器选区、内容变化时，即触发
-          // console.log("content", editor.children);
-          // console.log("html", editor.getHtml());
-          emit('update:modelValue', editor.getHtml())
-        }
+      toolbar: {
+        editor: null,
+        selector: '#wangEditorToolbar'
       }
     }
-    console.log('selector=>', selector)
-    const toolbar: wangEditor.Toolbar = {
-      options: {
-        el: '#wangEditorToolbar'
-      }
-    }
-    new wangEditor(selector, toolbar)
+    new wangEditor(options)
   })
 </script>
 

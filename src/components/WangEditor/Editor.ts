@@ -1,44 +1,40 @@
-const { createEditor, createToolbar } = window.wangEditor
-
+import '@wangeditor/editor/dist/css/style.css'
+import { createEditor, createToolbar, IDomEditor } from '@wangeditor/editor'
 export default class {
-  editor: wangEditor.Editor
-  constructor(private selector: wangEditor.Selector, private toolbar: wangEditor.Toolbar) {
-    // 生成编译器
-    const { uploadImageApi, ...options } = this.selector.options
-    // 初始默认配置
-    const defaultConfig = {
-      placeholder: '请输入内容啊',
-      MENU_CONF: {
-        uploadImage: {
-          // 服务端地址【必传】
-          server: uploadImageApi ?? '/api/upload',
-          // 自定义上传图片的钩子
-          ...this.updateImageHook()
-        }
+  editor: IDomEditor
+  constructor(private options: wangEditor.IOption) {
+    console.log('options=>', options)
+
+    // 默认提示语
+    options.editor.config.placeholder = '请输入内容'
+
+    // 初始化自定义上传图片
+    options.editor.config.MENU_CONF = {
+      uploadImage: {
+        // 上传图片的接口【必填】
+        server: this.options.uploadImageApi ?? '/api/upload',
+        // 自定义上传图片的钩子
+        ...this.updateImageHook()
       }
     }
+
     // 创建编辑器
-    this.editor = createEditor({
-      ...options,
-      selector: document.querySelector(options.el),
-      config: Object.assign({}, defaultConfig, this.selector.config ?? {})
-    })
+    this.editor = createEditor(options.editor)
 
     // 生成工具栏
-    this.toolbar.options.el && this.createToolbar()
+    options.toolbar.selector && this.createToolbar()
   }
 
   // 创建工具类
   createToolbar() {
-    const { config, options } = this.toolbar
-    const toolbarConfig: wangEditor.ToolbarConfig = Object.assign({}, config || {})
-
+    const defaultToolbarConfig = {}
+    console.log('this.options.toolbar=>', this.options.toolbar)
     // 创建工具栏
     createToolbar({
-      ...options,
+      ...defaultToolbarConfig,
+      ...this.options.toolbar,
       editor: this.editor,
-      selector: document.querySelector(options.el),
-      config: toolbarConfig
+      mode: 'default'
     })
   }
 
