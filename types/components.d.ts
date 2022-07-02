@@ -5,15 +5,8 @@ import '@vue/runtime-core'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
-    ElBreadcrumbItem: typeof import('element-plus/es')['ElBreadcrumbItem']
-    ElCard: typeof import('element-plus/es')['ElCard']
-    ElTabPane: typeof import('element-plus/es')['ElTabPane']
-    ElTabs: typeof import('element-plus/es')['ElTabs']
-    ElTag: typeof import('element-plus/es')['ElTag']
+    AnimateList: typeof import('./../src/components/AnimateList.vue')['default']
     MarkdownEditor: typeof import('./../src/components/Markdown/Editor.vue')['default']
-    MarkdownToastEditor: typeof import('./../src/components/markdown/ToastEditor.vue')['default']
-    NotificationNotification: typeof import('./../src/components/notification/Notification.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     TransitionTwTransition: typeof import('./../src/components/transition/TwTransition.vue')['default']
@@ -23,7 +16,6 @@ declare module '@vue/runtime-core' {
     TwLink: typeof import('./../src/components/Tw/Link.vue')['default']
     TwNotification: typeof import('./../src/components/Tw/Notification.vue')['default']
     WangEditorEditor: typeof import('./../src/components/WangEditor/Editor.vue')['default']
-    WangEditorWangEditor: typeof import('./../src/components/wangEditor/WangEditor.vue')['default']
   }
 }
 

@@ -1,7 +1,8 @@
 <script setup lang="ts">
   import { article } from '@/apis/articleApi'
-  const { result } = await article()
-  const artilces = ref(result)
+
+  const artilces = ref()
+  article().then(({ result }) => (artilces.value = result))
   const del = (index: number) => {
     artilces.value.splice(index, 1)
   }
@@ -9,34 +10,22 @@
 
 <template>
   <div class="article">
-    <TransitionGroup tag="ul" name="animate">
-      <li v-for="(article, index) of artilces" :key="article.id" @click="del(index)">
+    <AnimateList tag="ul" :delay="0.5" :duration="2">
+      <li :data-index="index * 0.1" v-for="(article, index) of artilces" :key="article.id" @click="del(index)">
         {{ article.title }}
       </li>
-    </TransitionGroup>
+    </AnimateList>
   </div>
 </template>
 
 <style lang="scss" scoped>
   .article {
-    position: relative;
+    @apply relative bg-slate-500 p-4 w-full min-h-screen;
+
     ul {
       li {
-        @apply p-3 mb-3 bg-green-500 text-white;
+        @apply p-3 mb-3 bg-green-500 text-white rounded-md;
       }
     }
-  }
-
-  .animate-leave-active {
-    transition: all 0.38s ease;
-    position: absolute;
-    width: 100%;
-  }
-
-  .animate-leave-to {
-    opacity: 0;
-  }
-  .animate-move {
-    transition: all 0.38s ease;
   }
 </style>
