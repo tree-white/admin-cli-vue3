@@ -1,4 +1,5 @@
 import { uploadImage } from '@/apis/uploadApi'
+import '@toast-ui/editor/dist/toastui-editor.css'
 import Editor from '@toast-ui/editor'
 export default class {
   // 定义编辑器实例

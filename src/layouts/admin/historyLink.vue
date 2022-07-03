@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import menuService from '@/composables/menu'
+  import menuService from '@/composables/menu'
 </script>
 
 <template>
@@ -10,16 +10,19 @@ import menuService from '@/composables/menu'
     <div
       v-for="(menu, index) of menuService.history.value"
       :key="index"
-      class="bg-white py-2 px-3 rounded-md text-sm text-gray-600 border hover:shadow-md hover:scale-105 duration-300"
+      class="flex items-center bg-white py-2 px-3 rounded-md text-sm text-gray-600 border hover:shadow-md hover:scale-105 duration-300"
       :class="{ 'bg-violet-400 !text-white': menu.route === $route.name }"
     >
       <router-link :to="{ name: menu.route }">{{ menu.title }}</router-link>
 
-      <i
+      <icon-close
         v-show="menu.route === $route.name"
-        class="fas fa-times ml-2 hover:rotate-180 duration-300 hover:text-yellow-400"
+        theme="multi-color"
+        size="12"
+        :fill="['#ffffff', '#4a4a4a', '#ffffff', '#43CCF8']"
+        class="ml-2 hover:rotate-180 duration-300"
         @click="menuService.removeHistoryMenu(menu)"
-      ></i>
+      />
     </div>
   </div>
 </template>

@@ -33,7 +33,7 @@
             :enter-active-class="route.meta.enterClass ?? 'animate__fadeInRight'"
             :leave-active-class="route.meta.leaveClass ?? 'animate__fadeOutLeft'"
           >
-            <Component :is="Component" class="absolute w-full" />
+            <component :is="Component" class="absolute w-full" />
           </Transition>
         </router-view>
       </div>

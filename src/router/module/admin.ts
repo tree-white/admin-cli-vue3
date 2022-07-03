@@ -4,7 +4,7 @@ export default {
   name: 'admin',
   path: '/admin',
   component: () => import('@/layouts/admin.vue'),
-  meta: { auth: true, menu: { title: '仪表盘', icon: 'fas fa-home' } },
+  meta: { auth: true, menu: { title: '仪表盘', icon: 'DashboardOne' } },
 
   children: [
     {

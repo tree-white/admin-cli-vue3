@@ -1,11 +1,13 @@
 <script setup lang="ts">
   import * as echarts from 'echarts'
+  import * as icons from '@icon-park/vue-next'
   import { echart1, echart2 } from './echart'
+  import { IconType } from '@icon-park/vue-next/es/all'
   interface ICard {
     id: number
     title: string
     price: number
-    icon: string
+    icon: IconType
     iconColor: string
     totalTitle: string
     total: number
@@ -23,7 +25,7 @@
       title: '总人数',
       price: 23742,
       iconColor: 'text-violet-500',
-      icon: 'fas fa-address-card',
+      icon: 'IdCardH',
       totalTitle: '总人数',
       total: 123042
     },
@@ -32,7 +34,7 @@
       title: '销售额',
       price: 123422,
       iconColor: 'text-red-500',
-      icon: 'fab fa-bitcoin',
+      icon: 'SalesReport',
       totalTitle: '总销售额',
       total: 53433
     },
@@ -41,7 +43,7 @@
       title: '订单数',
       price: 1232,
       iconColor: 'text-green-700',
-      icon: 'fab fa-buffer',
+      icon: 'Order',
       totalTitle: '总订单数',
       total: 4362
     },
@@ -50,7 +52,7 @@
       title: '评论数',
       price: 8374,
       iconColor: 'text-blue-500',
-      icon: 'fab fa-chromecast',
+      icon: 'Comments',
       totalTitle: '总评论数',
       total: 34564
     }
@@ -77,7 +79,7 @@
 
         <section class="mt-3 flex justify-between items-center">
           {{ card.price }}
-          <i :class="[card.icon, card.iconColor]" class="text-5xl"></i>
+          <component :is="icons[card.icon]" theme="filled" size="48" :class="card.iconColor"></component>
         </section>
 
         <section class="flex justify-between items-center text-base mt-6">

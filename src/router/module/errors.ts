@@ -4,7 +4,7 @@ export default {
   name: 'error',
   path: '/error',
   component: () => import('@/layouts/admin.vue'),
-  meta: { auth: true, menu: { title: '错误页面', icon: 'fas fa-baseball-ball' } },
+  meta: { auth: true, menu: { title: '错误页面', icon: 'ErrorPicture' } },
   children: [
     {
       name: 'error403',

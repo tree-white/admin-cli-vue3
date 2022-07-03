@@ -50,7 +50,12 @@
         <div>
           <TwButton>登录</TwButton>
           <div class="flex justify-center align-center mt-2">
-            <i class="fa-brands fa-weixin bg-green-500 text-white p-1 rounded-full cursor-pointer"></i>
+            <icon-wechat
+              theme="filled"
+              size="20"
+              :fill="['#22c55e', '#ffffff']"
+              class="p-2 rounded-full cursor-pointer bg-gray-200"
+            />
           </div>
           <div class="flex gap-3 justify-center mt-3">
             <TwLink href="https://blog.treewhite.com" target="_blank">网站首页</TwLink>
